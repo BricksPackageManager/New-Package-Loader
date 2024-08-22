@@ -1,1 +1,21 @@
+import requests
 
+url = input("Add File URL>" )
+name = input("Name Of External Package Container> ")
+
+print("Package Repo: " + url)
+r = requests.get(url,stream = True, auth=("user", "pass"))
+
+if r.status_code == 200:
+    # Print the HTML source code
+    # print(r.text)
+    PKGW = open(name + ".json", "w")
+    PKGW.write(r.text)
+    PKGW.close()
+    
+else:
+    print("error 404 webpage not found or canot acesses")
+print("StatusCode: " + str(r.status_code))
+
+
+input("Continue")
